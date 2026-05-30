@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>StudentTasker - Prototyp</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 40px;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+
+        h1, h2, h3, p {
+            margin: 0;
+        }
+
+        .page-title {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            margin: 40px 0 20px;
+            font-size: 28px;
+        }
+
+        .screen {
+            background: white;
+            border-radius: 18px;
+            padding: 24px;
+            margin-bottom: 35px;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.12);
+            page-break-inside: avoid;
+        }
+
+        .screen-label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #2563eb;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+
+        .web-frame {
+            width: 100%;
+            min-height: 520px;
+            border: 2px solid #dbeafe;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #f8fafc;
+        }
+
+        .mobile-frame {
+            width: 390px;
+            min-height: 720px;
+            margin: 0 auto;
+            border: 8px solid #0f172a;
+            border-radius: 36px;
+            overflow: hidden;
+            background: #f8fafc;
+        }
+
+        .topbar {
+            height: 70px;
+            background: #1e3a8a;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav {
+            display: flex;
+            gap: 18px;
+            font-size: 14px;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 450px;
+        }
+
+        .sidebar {
+            width: 230px;
+            background: #e0ecff;
+            padding: 24px;
+        }
+
+        .sidebar div {
+            padding: 12px 14px;
+            margin-bottom: 8px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .sidebar .active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .content {
+            flex: 1;
+            padding: 28px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #dbeafe;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .card h3 {
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2563eb;
+            margin-top: 10px;
+        }
+
+        .login-box {
+            width: 420px;
+            margin: 70px auto;
+            background: white;
+            padding: 34px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.15);
+        }
+
+        .login-box h2 {
+            margin-bottom: 12px;
+            color: #1e3a8a;
+        }
+
+        .login-box p {
+            color: #64748b;
+            margin-bottom: 22px;
+        }
+
+        .input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            margin-bottom: 14px;
+        }
+
+        .button {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 13px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .button.secondary {
+            background: #e0ecff;
+            color: #1e3a8a;
+        }
+
+        .table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .table th,
+        .table td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .table th {
+            background: #e0ecff;
+            color: #1e3a8a;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .blue {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .green {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .yellow {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .red {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .kanban {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 22px;
+        }
+
+        .column {
+            background: #eef4ff;
+            border-radius: 16px;
+            padding: 16px;
+        }
+
+        .task {
+            background: white;
+            border-radius: 14px;
+            padding: 14px;
+            margin-top: 12px;
+            box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+        }
+
+        .task strong {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .mobile-top {
+            background: #1e3a8a;
+            color: white;
+            padding: 22px;
+        }
+
+        .mobile-content {
+            padding: 20px;
+        }
+
+        .mobile-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 14px;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            font-size: 12px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .mobile-card {
+            background: white;
+            padding: 16px;
+            border-radius: 16px;
+            margin-bottom: 14px;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+        }
+
+        .mobile-login {
+            padding: 70px 24px;
+        }
+
+        .mobile-login h2 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .mobile-login p {
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+
+        .phone-button {
+            width: 100%;
+            margin-top: 6px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 20px;
+            }
+
+            .screen {
+                page-break-after: always;
+                box-shadow: none;
+                border: 1px solid #e2e8f0;
+            }
+
+            .section-title {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1 class="page-title">StudentTasker — prototyp aplikacji</h1>
+
+<h2 class="section-title">Wersja WEB</h2>
+
+<div class="screen">
+    <div class="screen-label">WEB 1/5 — Ekran logowania</div>
+    <div class="web-frame">
+        <div class="login-box">
+            <h2>StudentTasker</h2>
+            <p>Zaloguj się, aby zarządzać projektami i zadaniami zespołu.</p>
+            <input class="input" type="email" placeholder="Adres e-mail">
+            <input class="input" type="password" placeholder="Hasło">
+            <button class="button">Zaloguj się</button>
+            <button class="button secondary">Utwórz konto</button>
+        </div>
+    </div>
+</div>
+
+<div class="screen">
+    <div class="screen-label">WEB 2/5 — Dashboard</div>
+    <div class="web-frame">
+        <div class="topbar">
+            <div class="logo">StudentTasker</div>
+            <div class="nav">
+                <span>Dashboard</span>
+                <span>Projekty</span>
+                <span>Zadania</span>
+                <span>Wyloguj</span>
+            </div>
+        </div>
+        <div class="layout">
+            <div class="sidebar">
+                <div class="active">Dashboard</div>
+                <div>Moje projekty</div>
+                <div>Moje zadania</div>
+                <div>Profil</div>
+            </div>
+            <div class="content">
+                <h2>Witaj, Szymon!</h2>
+                <p>Przegląd aktywności w Twoich projektach studenckich.</p>
+                <div class="cards">
+                    <div class="card">
+                        <h3>Aktywne projekty</h3>
+                        <div class="number">4</div>
+                    </div>
+                    <div class="card">
+                        <h3>Zadania do wykonania</h3>
+                        <div class="number">12</div>
+                    </div>
+                    <div class="card">
+                        <h3>Ukończone zadania</h3>
+                        <div class="number">28</div>
+                    </div>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Ostatnia aktywność</th>
+                        <th>Projekt</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>Zmieniono status zadania „Opis bazy danych”</td>
+                        <td>Projekt PHP</td>
+                        <td><span class="badge green">Zrobione</span></td>
+                    </tr>
+                    <tr>
+                        <td>Dodano komentarz do zadania</td>
+                        <td>Aplikacja webowa</td>
+                        <td><span class="badge yellow">W trakcie</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="screen">
+    <div class="screen-label">WEB 3/5 — Lista projektów</div>
+    <div class="web-frame">
+        <div class="topbar">
+            <div class="logo">StudentTasker</div>
+            <div class="nav">
+                <span>Dashboard</span>
+                <span>Projekty</span>
+                <span>Zadania</span>
+                <span>Wyloguj</span>
+            </div>
+        </div>
+        <div class="layout">
+            <div class="sidebar">
+                <div>Dashboard</div>
+                <div class="active">Moje projekty</div>
+                <div>Moje zadania</div>
+                <div>Profil</div>
+            </div>
+            <div class="content">
+                <h2>Moje projekty</h2>
+                <p>Lista projektów, do których należysz.</p>
+                <div class="cards">
+                    <div class="card">
+                        <h3>Projekt PHP</h3>
+                        <p>Aplikacja zaliczeniowa MVC.</p>
+                        <p><span class="badge yellow">W trakcie</span></p>
+                    </div>
+                    <div class="card">
+                        <h3>Baza PostgreSQL</h3>
+                        <p>Projekt relacyjnej bazy danych.</p>
+                        <p><span class="badge blue">Planowany</span></p>
+                    </div>
+                    <div class="card">
+                        <h3>Dokumentacja</h3>
+                        <p>README, ERD i scenariusze testowe.</p>
+                        <p><span class="badge green">Aktywny</span></p>
+                    </div>
+                </div>
+                <br>
+                <button class="button">Dodaj projekt</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="screen">
+    <div class="screen-label">WEB 4/5 — Szczegóły projektu i zadania</div>
+    <div class="web-frame">
+        <div class="topbar">
+            <div class="logo">StudentTasker</div>
+            <div class="nav">
+                <span>Dashboard</span>
+                <span>Projekty</span>
+                <span>Zadania</span>
+                <span>Wyloguj</span>
+            </div>
+        </div>
+        <div class="content">
+            <h2>Projekt PHP — zadania</h2>
+            <p>Tablica zadań zespołu z podziałem na statusy.</p>
+            <div class="kanban">
+                <div class="column">
+                    <h3>Do zrobienia</h3>
+                    <div class="task">
+                        <strong>Utworzyć diagram ERD</strong>
+                        <span class="badge blue">Nowe</span>
+                    </div>
+                    <div class="task">
+                        <strong>Przygotować README</strong>
+                        <span class="badge blue">Nowe</span>
+                    </div>
+                </div>
+                <div class="column">
+                    <h3>W trakcie</h3>
+                    <div class="task">
+                        <strong>Logowanie użytkownika</strong>
+                        <span class="badge yellow">W trakcie</span>
+                    </div>
+                    <div class="task">
+                        <strong>Widoki SQL</strong>
+                        <span class="badge yellow">W trakcie</span>
+                    </div>
+                </div>
+                <div class="column">
+                    <h3>Zrobione</h3>
+                    <div class="task">
+                        <strong>Konfiguracja Dockera</strong>
+                        <span class="badge green">Zrobione</span>
+                    </div>
+                    <div class="task">
+                        <strong>Repozytorium Git</strong>
+                        <span class="badge green">Zrobione</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="screen">
+    <div class="screen-label">WEB 5/5 — Panel administratora</div>
+    <div class="web-frame">
+        <div class="topbar">
+            <div class="logo">StudentTasker Admin</div>
+            <div class="nav">
+                <span>Użytkownicy</span>
+                <span>Role</span>
+                <span>Projekty</span>
+                <span>Wyloguj</span>
+            </div>
+        </div>
+        <div class="content">
+            <h2>Zarządzanie użytkownikami</h2>
+            <p>Administrator może zarządzać kontami i rolami użytkowników.</p>
+            <table class="table">
+                <tr>
+                    <th>Imię i nazwisko</th>
+                    <th>E-mail</th>
+                    <th>Rola</th>
+                    <th>Status</th>
+                    <th>Akcja</th>
+                </tr>
+                <tr>
+                    <td>Szymon Rog</td>
+                    <td>szymon@example.com</td>
+                    <td><span class="badge red">Admin</span></td>
+                    <td><span class="badge green">Aktywny</span></td>
+                    <td>Edytuj</td>
+                </tr>
+                <tr>
+                    <td>Anna Kowalska</td>
+                    <td>anna@example.com</td>
+                    <td><span class="badge blue">Lider</span></td>
+                    <td><span class="badge green">Aktywny</span></td>
+                    <td>Edytuj</td>
+                </tr>
+                <tr>
+                    <td>Jan Nowak</td>
+                    <td>jan@example.com</td>
+                    <td><span class="badge yellow">Student</span></td>
+                    <td><span class="badge red">Zablokowany</span></td>
+                    <td>Odblokuj</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<h2 class="section-title">Wersja MOBILE</h2>
+
+<div class="screen">
+    <div class="screen-label">MOBILE 1/5 — Logowanie</div>
+    <div class="mobile-frame">
+        <div class="mobile-login">
+            <h2>StudentTasker</h2>
+            <p>Zaloguj się do aplikacji zarządzania projektami.</p>
+            <input class="input" type="email" placeholder="Adres e-mail">
+            <input class="input" type="password" placeholder="Hasło">
+            <button class="button phone-button">Zaloguj się</button>
+            <button class="button secondary phone-button">Rejestracja</button>
+        </div>
+    </div>
+</div>
+
+<div class="screen">
+    <div class="screen-label">MOBILE 2/5 — Dashboard</div>
+    <div class="mobile-frame">
+        <div class="mobile-top">
+            <h2>Dashboard</h2>
+            <p>Witaj, Szymon!</p>
+        </div>
+        <div class="mobile-content">
+            <div class="mobile-card">
+                <h3>Aktywne projekty</h3>
+                <div class="number">4</div>
+            </div>
+            <div class="mobile-card">
+                <h3>Zadania do wykonania</h3>
+                <div class="number">12</div>
+            </div>
+            <div class="mobile-card">
+                <h3>Ostatnia aktywność</h3>
+                <p>Zmieniono status zadania „Logowanie użytkownika”.</p>
+            </div>
+        </div>
+        <div class="mobile-nav">
+            <span>Start</span>
+            <span>Projekty</span>
+            <span>Zadania</span>
+            <span>Profil</span>
+        </div>
+    </div>
+</div>
+
+<div class="screen">
+    <div class="screen-label">MOBILE 3/5 — Lista projektów</div>
+    <div class="mobile-frame">
+        <div class="mobile-top">
+            <h2>Projekty</h2>
+            <p>Twoje projekty zespołowe</p>
+        </div>
+        <div class="mobile-content">
+            <div class="mobile-card">
+                <h3>Projekt PHP</h3>
+                <p>Aplikacja MVC w PHP.</p>
+                <span class="badge yellow">W trakcie</span>
+            </div>
+            <div class="mobile-card">
+                <h3>Baza PostgreSQL</h3>
+                <p>Relacje, widoki i wyzwalacze.</p>
+                <span class="badge blue">Planowany</span>
+            </div>
+            <div class="mobile-card">
+                <h3>Dokumentacja</h3>
+                <p>README, ERD i testy.</p>
+                <span class="badge green">Aktywny</span>
+            </div>
+            <button class="button phone-button">Dodaj projekt</button>
+        </div>
+        <div class="mobile-nav">
+            <span>Start</span>
+            <span>Projekty</span>
+            <span>Zadania</span>
+            <span>Profil</span>
+        </div>
+    </div>
+</div>
+
+<div class="screen">
+    <div class="screen-label">MOBILE 4/5 — Zadania projektu</div>
+    <div class="mobile-frame">
+        <div class="mobile-top">
+            <h2>Zadania</h2>
+            <p>Projekt PHP</p>
+        </div>
+        <div class="mobile-content">
+            <div class="mobile-card">
+                <h3>Utworzyć diagram ERD</h3>
+                <p>Przypisane do: Szymon</p>
+                <span class="badge blue">Do zrobienia</span>
+            </div>
+            <div class="mobile-card">
+                <h3>Logowanie użytkownika</h3>
+                <p>Przypisane do: Anna</p>
+                <span class="badge yellow">W trakcie</span>
+            </div>
+            <div class="mobile-card">
+                <h3>Konfiguracja Dockera</h3>
+                <p>Przypisane do: Szymon</p>
+                <span class="badge green">Zrobione</span>
+            </div>
+        </div>
+        <div class="mobile-nav">
+            <span>Start</span>
+            <span>Projekty</span>
+            <span>Zadania</span>
+            <span>Profil</span>
+        </div>
+    </div>
+</div>
+
+<div class="screen">
+    <div class="screen-label">MOBILE 5/5 — Profil użytkownika</div>
+    <div class="mobile-frame">
+        <div class="mobile-top">
+            <h2>Profil</h2>
+            <p>Dane użytkownika i ustawienia konta</p>
+        </div>
+        <div class="mobile-content">
+            <div class="mobile-card">
+                <h3>Szymon Rog</h3>
+                <p>szymon@example.com</p>
+                <span class="badge red">Administrator</span>
+            </div>
+            <div class="mobile-card">
+                <h3>Uprawnienia</h3>
+                <p>Zarządzanie użytkownikami, projektami i zadaniami.</p>
+            </div>
+            <button class="button phone-button">Edytuj profil</button>
+            <button class="button secondary phone-button">Wyloguj się</button>
+        </div>
+        <div class="mobile-nav">
+            <span>Start</span>
+            <span>Projekty</span>
+            <span>Zadania</span>
+            <span>Profil</span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
