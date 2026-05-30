@@ -1,0 +1,30 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: studenttasker_app
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    env_file:
+      - .env.example
+
+  db:
+    image: postgres:16
+    container_name: studenttasker_db
+    restart: always
+    environment:
+      POSTGRES_DB: studenttasker
+      POSTGRES_USER: studenttasker_user
+      POSTGRES_PASSWORD: studenttasker_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - studenttasker_pgdata:/var/lib/postgresql/data
+
+volumes:
+  studenttasker_pgdata:
