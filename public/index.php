@@ -23,6 +23,7 @@ use App\Controllers\AuthController;
 use App\Controllers\DashboardController;
 use App\Controllers\HomeController;
 use App\Controllers\ProjectController;
+use App\Controllers\TaskApiController;
 use App\Core\Router;
 
 $router = new Router();
@@ -38,5 +39,7 @@ $router->get('/admin/users', [AdminController::class, 'users']);
 
 $router->get('/projects', [ProjectController::class, 'index']);
 $router->get('/projects/show', [ProjectController::class, 'show']);
+
+$router->post('/api/tasks/status', [TaskApiController::class, 'updateStatus']);
 
 $router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

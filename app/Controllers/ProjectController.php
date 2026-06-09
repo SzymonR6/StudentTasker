@@ -73,12 +73,14 @@ class ProjectController extends Controller
         }
 
         $tasks = $this->taskRepository->findByProjectId($projectId);
+        $statuses = $this->taskRepository->findStatuses();
 
-        $this->view('project_show', [
+            $this->view('project_show', [
             'title' => $project['name'],
             'user' => $user,
             'project' => $project,
             'tasks' => $tasks,
+            'statuses' => $statuses,
         ]);
     }
 }

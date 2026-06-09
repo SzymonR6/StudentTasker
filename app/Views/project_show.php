@@ -55,9 +55,19 @@
                         </td>
                         <td><?= htmlspecialchars($task['priority']) ?></td>
                         <td>
-                            <span class="role-badge">
-                                <?= htmlspecialchars($task['status_name']) ?>
-                            </span>
+                            <select
+                                class="task-status-select"
+                                data-task-id="<?= htmlspecialchars((string) $task['id']) ?>"
+                            >
+                                <?php foreach ($statuses as $status): ?>
+                                    <option
+                                        value="<?= htmlspecialchars((string) $status['id']) ?>"
+                                        <?= (int) $status['id'] === (int) $task['status_id'] ? 'selected' : '' ?>
+                                    >
+                                        <?= htmlspecialchars($status['name']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                         </td>
                         <td><?= htmlspecialchars($task['assigned_user'] ?? 'Nie przypisano') ?></td>
                         <td><?= htmlspecialchars((string) $task['due_date']) ?></td>
@@ -67,3 +77,5 @@
         </table>
     </div>
 </section>
+
+<script src="/js/tasks.js"></script>
