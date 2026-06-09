@@ -42,6 +42,10 @@ $router->get('/projects/show', [ProjectController::class, 'show']);
 
 $router->get('/tasks/create', [ProjectController::class, 'createTaskForm']);
 $router->post('/tasks/store', [ProjectController::class, 'storeTask']);
+
+$router->get('/tasks/edit', [ProjectController::class, 'editTaskForm']);
+$router->post('/tasks/update', [ProjectController::class, 'updateTask']);
+
 $router->post('/tasks/delete', [ProjectController::class, 'deleteTask']);
 
 $router->post('/api/tasks/status', [TaskApiController::class, 'updateStatus']);

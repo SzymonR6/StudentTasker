@@ -139,4 +139,34 @@ class TaskRepository
             'task_id' => $taskId,
         ]);
     }
+
+
+    public function update(int $taskId, array $data): bool
+    {
+        $connection = Database::getConnection();
+
+        $statement = $connection->prepare(
+            'UPDATE tasks
+            SET
+                status_id = :status_id,
+                assigned_user_id = :assigned_user_id,
+                title = :title,
+                description = :description,
+                priority = :priority,
+                due_date = :due_date
+            WHERE id = :task_id'
+        );
+
+        return $statement->execute([
+            'task_id' => $taskId,
+            'status_id' => $data['status_id'],
+            'assigned_user_id' => $data['assigned_user_id'] ?: null,
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'priority' => $data['priority'],
+            'due_date' => $data['due_date'] ?: null,
+        ]);
+    }
+
+
 }

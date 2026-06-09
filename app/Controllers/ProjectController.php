@@ -244,4 +244,122 @@ class ProjectController extends Controller
         $this->redirect('/projects/show?id=' . $projectId);
     }
 
+
+
+    public function editTaskForm(): void
+    {
+        if (!$this->authService->isLoggedIn()) {
+            $this->redirect('/login');
+        }
+
+        $user = $this->authService->user();
+        $taskId = (int) ($_GET['id'] ?? 0);
+
+        if ($taskId <= 0) {
+            http_response_code(404);
+            echo 'Nie znaleziono zadania.';
+            return;
+        }
+
+        $task = $this->taskRepository->findById($taskId);
+
+        if ($task === null) {
+            http_response_code(404);
+            echo 'Nie znaleziono zadania.';
+            return;
+        }
+
+        $project = $this->projectRepository->findByIdForUser(
+            (int) $task['project_id'],
+            (int) $user['id'],
+            (string) $user['role']
+        );
+
+        if ($project === null) {
+            http_response_code(403);
+            $this->view('errors/403', [
+                'title' => 'Brak dostępu',
+                'user' => $user,
+            ]);
+            return;
+        }
+
+        $statuses = $this->taskRepository->findStatuses();
+        $members = $this->findProjectMembers((int) $task['project_id']);
+
+        $this->view('task_edit', [
+            'title' => 'Edytuj zadanie',
+            'user' => $user,
+            'project' => $project,
+            'task' => $task,
+            'statuses' => $statuses,
+            'members' => $members,
+            'error' => $_SESSION['task_error'] ?? null,
+        ]);
+
+        unset($_SESSION['task_error']);
+    }
+    
+
+    public function updateTask(): void
+    {
+        if (!$this->authService->isLoggedIn()) {
+            $this->redirect('/login');
+        }
+
+        $user = $this->authService->user();
+
+        $taskId = (int) ($_POST['task_id'] ?? 0);
+        $title = trim($_POST['title'] ?? '');
+        $description = trim($_POST['description'] ?? '');
+        $statusId = (int) ($_POST['status_id'] ?? 0);
+        $assignedUserId = (int) ($_POST['assigned_user_id'] ?? 0);
+        $priority = $_POST['priority'] ?? 'normal';
+        $dueDate = $_POST['due_date'] ?? null;
+
+        $task = $this->taskRepository->findById($taskId);
+
+        if ($task === null) {
+            http_response_code(404);
+            echo 'Nie znaleziono zadania.';
+            return;
+        }
+
+        $projectId = (int) $task['project_id'];
+
+        $project = $this->projectRepository->findByIdForUser(
+            $projectId,
+            (int) $user['id'],
+            (string) $user['role']
+        );
+
+        if ($project === null) {
+            http_response_code(403);
+            $this->view('errors/403', [
+                'title' => 'Brak dostępu',
+                'user' => $user,
+            ]);
+            return;
+        }
+
+        if ($title === '' || $statusId <= 0) {
+            $_SESSION['task_error'] = 'Podaj tytuł zadania i wybierz status.';
+            $this->redirect('/tasks/edit?id=' . $taskId);
+        }
+
+        $this->taskRepository->update($taskId, [
+            'status_id' => $statusId,
+            'assigned_user_id' => $assignedUserId,
+            'title' => $title,
+            'description' => $description,
+            'priority' => $priority,
+            'due_date' => $dueDate,
+        ]);
+
+        $this->redirect('/projects/show?id=' . $projectId);
+    }
+
+
+
+
 }

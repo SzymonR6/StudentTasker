@@ -550,3 +550,24 @@ body {
 .danger-button:hover {
     background: #fecaca;
 }
+
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.small-button {
+    display: inline-block;
+    background: #e0ecff;
+    color: #1e3a8a;
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.small-button:hover {
+    background: #bfdbfe;
+}

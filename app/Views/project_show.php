@@ -81,21 +81,30 @@
                         <td><?= htmlspecialchars($task['assigned_user'] ?? 'Nie przypisano') ?></td>
                         <td><?= htmlspecialchars((string) $task['due_date']) ?></td>
                         <td>
-                            <form
-                                method="POST"
-                                action="/tasks/delete"
-                                onsubmit="return confirm('Czy na pewno chcesz usunąć to zadanie?');"
-                            >
-                                <input
-                                    type="hidden"
-                                    name="task_id"
-                                    value="<?= htmlspecialchars((string) $task['id']) ?>"
+                            <div class="task-actions">
+                                <a
+                                    href="/tasks/edit?id=<?= htmlspecialchars((string) $task['id']) ?>"
+                                    class="small-button"
                                 >
+                                    Edytuj
+                                </a>
 
-                                <button type="submit" class="danger-button">
-                                    Usuń
-                                </button>
-                            </form>
+                                <form
+                                    method="POST"
+                                    action="/tasks/delete"
+                                    onsubmit="return confirm('Czy na pewno chcesz usunąć to zadanie?');"
+                                >
+                                    <input
+                                        type="hidden"
+                                        name="task_id"
+                                        value="<?= htmlspecialchars((string) $task['id']) ?>"
+                                    >
+
+                                    <button type="submit" class="danger-button">
+                                        Usuń
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 <?php endforeach; ?>
