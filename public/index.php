@@ -40,6 +40,9 @@ $router->get('/admin/users', [AdminController::class, 'users']);
 $router->get('/projects', [ProjectController::class, 'index']);
 $router->get('/projects/show', [ProjectController::class, 'show']);
 
+$router->get('/tasks/create', [ProjectController::class, 'createTaskForm']);
+$router->post('/tasks/store', [ProjectController::class, 'storeTask']);
+
 $router->post('/api/tasks/status', [TaskApiController::class, 'updateStatus']);
 
 $router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

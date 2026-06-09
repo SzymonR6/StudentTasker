@@ -90,4 +90,39 @@ class TaskRepository
 
         return $task ?: null;
     }
+
+    public function create(array $data): bool
+    {
+        $connection = Database::getConnection();
+
+        $statement = $connection->prepare(
+            'INSERT INTO tasks (
+                project_id,
+                status_id,
+                assigned_user_id,
+                title,
+                description,
+                priority,
+                due_date
+            ) VALUES (
+                :project_id,
+                :status_id,
+                :assigned_user_id,
+                :title,
+                :description,
+                :priority,
+                :due_date
+            )'
+        );
+
+        return $statement->execute([
+            'project_id' => $data['project_id'],
+            'status_id' => $data['status_id'],
+            'assigned_user_id' => $data['assigned_user_id'] ?: null,
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'priority' => $data['priority'],
+            'due_date' => $data['due_date'] ?: null,
+        ]);
+    }
 }

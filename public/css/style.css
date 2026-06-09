@@ -486,3 +486,52 @@ body {
     background: #dcfce7;
     color: #15803d;
 }
+
+
+.task-create-page {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.form-card {
+    max-width: 760px;
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.1);
+}
+
+.app-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.app-form label {
+    font-weight: bold;
+    color: #334155;
+    margin-top: 8px;
+}
+
+.app-form input,
+.app-form textarea,
+.app-form select {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+}
+
+.app-form textarea {
+    resize: vertical;
+}
+
+.app-form input:focus,
+.app-form textarea:focus,
+.app-form select:focus {
+    outline: none;
+    border-color: #2563eb;
+}

@@ -6,7 +6,15 @@
             <p><?= htmlspecialchars($project['description'] ?? '') ?></p>
         </div>
 
-        <a href="/projects" class="button secondary-button">Powrót do projektów</a>
+        <div class="actions">
+            <a href="/tasks/create?project_id=<?= htmlspecialchars((string) $project['id']) ?>" class="button">
+                Dodaj zadanie
+            </a>
+
+            <a href="/projects" class="button secondary-button">
+                Powrót do projektów
+            </a>
+        </div>
     </div>
 
     <div class="project-summary">
