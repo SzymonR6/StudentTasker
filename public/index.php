@@ -22,6 +22,7 @@ use App\Controllers\AdminController;
 use App\Controllers\AuthController;
 use App\Controllers\DashboardController;
 use App\Controllers\HomeController;
+use App\Controllers\ProjectController;
 use App\Core\Router;
 
 $router = new Router();
@@ -34,5 +35,8 @@ $router->get('/logout', [AuthController::class, 'logout']);
 
 $router->get('/dashboard', [DashboardController::class, 'index']);
 $router->get('/admin/users', [AdminController::class, 'users']);
+
+$router->get('/projects', [ProjectController::class, 'index']);
+$router->get('/projects/show', [ProjectController::class, 'show']);
 
 $router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

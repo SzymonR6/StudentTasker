@@ -382,3 +382,89 @@ body {
         justify-content: center;
     }
 }
+
+
+.projects-page,
+.project-details-page {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.project-card {
+    background: white;
+    border-radius: 20px;
+    padding: 26px;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.project-card h2 {
+    margin-top: 0;
+    color: #1e3a8a;
+}
+
+.project-card p {
+    color: #475569;
+    line-height: 1.5;
+}
+
+.project-meta {
+    padding: 14px;
+    background: #f8fafc;
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+}
+
+.project-meta p {
+    margin: 6px 0;
+}
+
+.progress-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #334155;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: #e2e8f0;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #2563eb;
+    border-radius: 999px;
+}
+
+.project-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+@media (max-width: 900px) {
+    .project-grid,
+    .project-summary {
+        grid-template-columns: 1fr;
+    }
+}
