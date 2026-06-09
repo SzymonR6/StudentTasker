@@ -29,27 +29,39 @@ class Router
         $handler = $this->routes[$requestMethod][$path] ?? null;
 
         if ($handler === null) {
-            http_response_code(404);
-            echo '404 - Nie znaleziono strony';
+            $this->showErrorPage(404, 'errors/404', 'Nie znaleziono strony');
             return;
         }
 
         [$controllerClass, $method] = $handler;
 
         if (!class_exists($controllerClass)) {
-            http_response_code(500);
-            echo 'Kontroler nie istnieje';
+            $this->showErrorPage(500, 'errors/404', 'Błąd aplikacji');
             return;
         }
 
         $controller = new $controllerClass();
 
         if (!method_exists($controller, $method)) {
-            http_response_code(500);
-            echo 'Metoda kontrolera nie istnieje';
+            $this->showErrorPage(500, 'errors/404', 'Błąd aplikacji');
             return;
         }
 
         $controller->$method();
+    }
+
+    private function showErrorPage(int $statusCode, string $view, string $title): void
+    {
+        http_response_code($statusCode);
+
+        $viewPath = __DIR__ . '/../Views/' . $view . '.php';
+        $layoutPath = __DIR__ . '/../Views/layout.php';
+
+        if (file_exists($viewPath) && file_exists($layoutPath)) {
+            require $layoutPath;
+            return;
+        }
+
+        echo $title;
     }
 }
