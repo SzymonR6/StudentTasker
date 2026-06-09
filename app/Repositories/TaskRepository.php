@@ -125,4 +125,18 @@ class TaskRepository
             'due_date' => $data['due_date'] ?: null,
         ]);
     }
+
+    public function delete(int $taskId): bool
+    {
+        $connection = Database::getConnection();
+
+        $statement = $connection->prepare(
+            'DELETE FROM tasks
+             WHERE id = :task_id'
+        );
+
+        return $statement->execute([
+            'task_id' => $taskId,
+        ]);
+    }
 }

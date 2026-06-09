@@ -535,3 +535,18 @@ body {
     outline: none;
     border-color: #2563eb;
 }
+
+
+.danger-button {
+    border: none;
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.danger-button:hover {
+    background: #fecaca;
+}

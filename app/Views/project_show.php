@@ -50,6 +50,7 @@
                     <th>Status</th>
                     <th>Przypisano do</th>
                     <th>Termin</th>
+                    <th>Akcje</th>
                 </tr>
             </thead>
             <tbody>
@@ -79,6 +80,23 @@
                         </td>
                         <td><?= htmlspecialchars($task['assigned_user'] ?? 'Nie przypisano') ?></td>
                         <td><?= htmlspecialchars((string) $task['due_date']) ?></td>
+                        <td>
+                            <form
+                                method="POST"
+                                action="/tasks/delete"
+                                onsubmit="return confirm('Czy na pewno chcesz usunąć to zadanie?');"
+                            >
+                                <input
+                                    type="hidden"
+                                    name="task_id"
+                                    value="<?= htmlspecialchars((string) $task['id']) ?>"
+                                >
+
+                                <button type="submit" class="danger-button">
+                                    Usuń
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

@@ -196,4 +196,52 @@ class ProjectController extends Controller
 
         return $statement->fetchAll();
     }
+
+
+
+    public function deleteTask(): void
+    {
+        if (!$this->authService->isLoggedIn()) {
+            $this->redirect('/login');
+        }
+
+        $user = $this->authService->user();
+        $taskId = (int) ($_POST['task_id'] ?? 0);
+
+        if ($taskId <= 0) {
+            http_response_code(404);
+            echo 'Nie znaleziono zadania.';
+            return;
+        }
+
+        $task = $this->taskRepository->findById($taskId);
+
+        if ($task === null) {
+            http_response_code(404);
+            echo 'Nie znaleziono zadania.';
+            return;
+        }
+
+        $projectId = (int) $task['project_id'];
+
+        $project = $this->projectRepository->findByIdForUser(
+            $projectId,
+            (int) $user['id'],
+            (string) $user['role']
+        );
+
+        if ($project === null) {
+            http_response_code(403);
+            $this->view('errors/403', [
+                'title' => 'Brak dostępu',
+                'user' => $user,
+            ]);
+            return;
+        }
+
+        $this->taskRepository->delete($taskId);
+
+        $this->redirect('/projects/show?id=' . $projectId);
+    }
+
 }
