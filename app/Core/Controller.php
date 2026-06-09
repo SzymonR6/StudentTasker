@@ -27,4 +27,23 @@ class Controller
         header('Location: ' . $path);
         exit;
     }
+
+    protected function unauthorized(): void
+    {
+        http_response_code(401);
+
+        $this->view('errors/401', [
+            'title' => 'Wymagane logowanie',
+        ]);
+    }
+
+    protected function forbidden(?array $user = null): void
+    {
+        http_response_code(403);
+
+        $this->view('errors/403', [
+            'title' => 'Brak dostępu',
+            'user' => $user,
+        ]);
+    }
 }

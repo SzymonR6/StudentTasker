@@ -19,7 +19,8 @@ class DashboardController extends Controller
     public function index(): void
     {
         if (!$this->authService->isLoggedIn()) {
-            $this->redirect('/login');
+            $this->unauthorized();
+            return;
         }
 
         $user = $this->authService->user();
