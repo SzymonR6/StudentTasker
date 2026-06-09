@@ -18,11 +18,19 @@ spl_autoload_register(function (string $className): void {
     }
 });
 
+use App\Controllers\AuthController;
+use App\Controllers\DashboardController;
 use App\Controllers\HomeController;
 use App\Core\Router;
 
 $router = new Router();
 
 $router->get('/', [HomeController::class, 'index']);
+
+$router->get('/login', [AuthController::class, 'showLoginForm']);
+$router->post('/login', [AuthController::class, 'login']);
+$router->get('/logout', [AuthController::class, 'logout']);
+
+$router->get('/dashboard', [DashboardController::class, 'index']);
 
 $router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

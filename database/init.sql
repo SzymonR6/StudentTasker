@@ -291,10 +291,10 @@ INSERT INTO task_statuses (name, sort_order) VALUES
 ('Zrobione', 3);
 
 INSERT INTO users (role_id, email, password_hash, first_name, last_name, is_active) VALUES
-(1, 'admin@studenttasker.local', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC5jvC0bqf77w4c9Haq', 'Szymon', 'Rog', TRUE),
-(2, 'anna@studenttasker.local', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC5jvC0bqf77w4c9Haq', 'Anna', 'Kowalska', TRUE),
-(3, 'jan@studenttasker.local', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC5jvC0bqf77w4c9Haq', 'Jan', 'Nowak', TRUE),
-(3, 'ewa@studenttasker.local', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC5jvC0bqf77w4c9Haq', 'Ewa', 'Zielinska', FALSE);
+(1, 'admin@studenttasker.local', '$2y$10$jGn5kbiGKAaPBeKmpCBBeeERdmqwjR1ftQZqOPNbumJiD.bpwO4e', 'Szymon', 'Rog', TRUE),
+(2, 'anna@studenttasker.local', '$2y$10$jGn5kbiGKAaPBeKmpCBBeeERdmqwjR1ftQZqOPNbumJiD.bpwO4e', 'Anna', 'Kowalska', TRUE),
+(3, 'jan@studenttasker.local', '$2y$10$jGn5kbiGKAaPBeKmpCBBeeERdmqwjR1ftQZqOPNbumJiD.bpwO4e', 'Jan', 'Nowak', TRUE),
+(3, 'ewa@studenttasker.local', '$2y$10$jGn5kbiGKAaPBeKmpCBBeeERdmqwjR1ftQZqOPNbumJiD.bpwO4e', 'Ewa', 'Zielinska', FALSE);
 
 INSERT INTO user_profiles (user_id, phone, bio, avatar_url) VALUES
 (1, '500100100', 'Administrator projektu StudentTasker.', NULL),
