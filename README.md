@@ -366,42 +366,42 @@ docs/screens/
 
 ## Checklista wymagań
 
-* [x] Docker
-* [x] Git
-* [x] HTML5
-* [x] CSS
-* [x] JavaScript
-* [x] Fetch API
-* [x] PHP obiektowy
-* [x] PostgreSQL
-* [x] Architektura MVC
-* [x] Logowanie
-* [x] Sesje
-* [x] Wylogowanie
-* [x] Role użytkowników
-* [x] Uprawnienia użytkowników
-* [x] Zarządzanie użytkownikami
-* [x] CRUD zadań
-* [x] Relacje w bazie danych
-* [x] Relacja jeden do jednego
-* [x] Relacja jeden do wielu
-* [x] Relacja wiele do wielu
-* [x] Minimum 2 widoki SQL
-* [x] Minimum 1 funkcja SQL
-* [x] Minimum 1 wyzwalacz SQL
-* [x] Transakcje w pliku SQL
-* [x] Klucze główne i obce
-* [x] JOIN w zapytaniach SQL
-* [x] Responsywność
-* [x] Media queries
-* [x] Strona 401
-* [x] Strona 403
-* [x] Strona 404
-* [ ] Diagram ERD
-* [ ] Diagram architektury
-* [ ] Screeny aplikacji webowej i mobilnej
-* [ ] Finalny eksport bazy danych SQL
-* [ ] Końcowe sprawdzenie projektu
+✅ Docker  
+✅ Git  
+✅ HTML5  
+✅ CSS  
+✅ JavaScript  
+✅ Fetch API  
+✅ PHP obiektowy  
+✅ PostgreSQL  
+✅ Architektura MVC  
+✅ Logowanie  
+✅ Sesje  
+✅ Wylogowanie  
+✅ Role użytkowników  
+✅ Uprawnienia użytkowników  
+✅ Zarządzanie użytkownikami  
+✅ CRUD zadań  
+✅ Relacje w bazie danych  
+✅ Relacja jeden do jednego  
+✅ Relacja jeden do wielu  
+✅ Relacja wiele do wielu  
+✅ Minimum 2 widoki SQL  
+✅ Minimum 1 funkcja SQL  
+✅ Minimum 1 wyzwalacz SQL  
+✅ Transakcje w pliku SQL  
+✅ Klucze główne i obce  
+✅ JOIN w zapytaniach SQL  
+✅ Responsywność  
+✅ Media queries  
+✅ Strona 401  
+✅ Strona 403  
+✅ Strona 404  
+✅ Diagram ERD  
+✅ Diagram architektury  
+✅ Screeny aplikacji webowej i mobilnej  
+✅ Finalny eksport bazy danych SQL  
+⏳ Końcowe sprawdzenie projektu
 
 ## Autor
 
