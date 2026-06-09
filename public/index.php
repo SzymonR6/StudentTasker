@@ -36,6 +36,7 @@ $router->get('/logout', [AuthController::class, 'logout']);
 
 $router->get('/dashboard', [DashboardController::class, 'index']);
 $router->get('/admin/users', [AdminController::class, 'users']);
+$router->post('/admin/users/toggle-status', [AdminController::class, 'toggleUserStatus']);
 
 $router->get('/projects', [ProjectController::class, 'index']);
 $router->get('/projects/show', [ProjectController::class, 'show']);

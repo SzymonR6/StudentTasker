@@ -571,3 +571,24 @@ body {
 .small-button:hover {
     background: #bfdbfe;
 }
+
+
+.success-button {
+    border: none;
+    background: #dcfce7;
+    color: #15803d;
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.success-button:hover {
+    background: #bbf7d0;
+}
+
+.muted-text {
+    color: #64748b;
+    font-size: 14px;
+    font-weight: bold;
+}

@@ -21,6 +21,7 @@
                     <th>E-mail</th>
                     <th>Rola</th>
                     <th>Status</th>
+                    <th>Akcje</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,6 +42,33 @@
                                 <span class="status active">Aktywny</span>
                             <?php else: ?>
                                 <span class="status inactive">Nieaktywny</span>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if ((int) $account['id'] === (int) $user['id']): ?>
+                                <span class="muted-text">To jest Twoje konto</span>
+                            <?php else: ?>
+                                <form
+                                    method="POST"
+                                    action="/admin/users/toggle-status"
+                                    onsubmit="return confirm('Czy na pewno chcesz zmienić status tego użytkownika?');"
+                                >
+                                    <input
+                                        type="hidden"
+                                        name="user_id"
+                                        value="<?= htmlspecialchars((string) $account['id']) ?>"
+                                    >
+
+                                    <?php if ($account['is_active']): ?>
+                                        <button type="submit" class="danger-button">
+                                            Dezaktywuj
+                                        </button>
+                                    <?php else: ?>
+                                        <button type="submit" class="success-button">
+                                            Aktywuj
+                                        </button>
+                                    <?php endif; ?>
+                                </form>
                             <?php endif; ?>
                         </td>
                     </tr>
