@@ -10,6 +10,9 @@
         <div class="logo">StudentTasker</div>
         <nav>
             <a href="/">Start</a>
+            <a href="/login">Logowanie</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/admin/users">Admin</a>
             <a href="/prototype.html">Prototyp</a>
         </nav>
     </header>
